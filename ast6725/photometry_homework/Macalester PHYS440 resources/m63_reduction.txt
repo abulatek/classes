@@ -1,0 +1,507 @@
+#### M63 FROM THE MAC OBSERVATORY
+#### Alyssa Bulatek
+#### PHYS 440: Observational Astronomy, Spring 2018
+
+## Step 1: For a given integration time, average dark frames together.
+
+# apr04/
+imcombine input=dark1_4s_apr04,dark2_4s_apr04,dark3_4s_apr04,dark4_4s_apr04,dark5_4s_apr04 output=dark_4s_apr04 reject=crreject hsigma=3
+mv dark_4s_apr04.fits ..
+
+# apr06_ish/
+imcombine input=dark1_0.5s_apr06,dark2_0.5s_apr06,dark3_0.5s_apr06,dark4_0.5s_apr06,dark5_0.5s_apr06 output=dark_0.5s_apr06 reject=crreject hsigma=3
+mv dark_0.5s_apr06.fits ..
+
+imcombine input=dark1_0.6s_apr06,dark2_0.6s_apr06,dark3_0.6s_apr06,dark4_0.6s_apr06,dark5_0.6s_apr06 output=dark_0.6s_apr06 reject=crreject hsigma=3
+mv dark_0.6s_apr06.fits ..
+
+imcombine input=dark1_15s_apr07,dark2_15s_apr07,dark3_15s_apr07,dark4_15s_apr07,dark5_15s_apr07 output=dark_15s_apr07 reject=crreject hsigma=3
+mv dark_15s_apr07.fits ..
+
+imcombine input=dark1_90s_apr07,dark2_90s_apr07,dark3_90s_apr07,dark4_90s_apr07,dark5_90s_apr07 output=dark_90s_apr07 reject=crreject hsigma=3
+mv dark_90s_apr07.fits ..
+
+imcombine input=dark1_150s_apr08,dark2_150s_apr08,dark3_150s_apr08,dark4_150s_apr08,dark5_150s_apr08 output=dark_150s_apr08 reject=crreject hsigma=3
+mv dark_150s_apr08.fits ..
+
+# feb16/
+imcombine input=dark1_150s_feb16,dark2_150s_feb16,dark3_150s_feb16,dark4_150s_feb16,dark5_150s_feb16 output=dark_150s_feb16 reject=crreject hsigma=3
+mv dark_150s_feb16.fits ..
+
+# feb20/
+imcombine input=dark1_90s_feb20,dark2_90s_feb20,dark3_90s_feb20,dark4_90s_feb20,dark5_90s_feb20 output=dark_90s_feb20 reject=crreject hsigma=3
+mv dark_90s_feb20.fits ..
+
+imcombine input=dark1_150s_feb20,dark2_150s_feb20,dark3_150s_feb20,dark4_150s_feb20,dark5_150s_feb20 output=dark_150s_feb20 reject=crreject hsigma=3
+mv dark_150s_feb20.fits ..
+
+# feb26/
+imcombine input=dark1_90s_feb26,dark2_90s_feb26,dark3_90s_feb26,dark4_90s_feb26,dark5_90s_feb26 output=dark_90s_feb26 reject=crreject hsigma=3
+mv dark_90s_feb26.fits ..
+
+# mar22/
+imcombine input=dark1_0.2s_mar22,dark2_0.2s_mar22,dark3_0.2s_mar22,dark4_0.2s_mar22,dark5_0.2s_mar22 output=dark_0.2s_mar22 reject=crreject hsigma=3
+mv dark_0.2s_mar22.fits ..
+
+
+## Step 2: Subtract dark frames from science and flat field images.
+## Did not run anything regarding SII as I do not have 2s or 2.5s darks. An unfortunate oversight.
+
+# B/
+imarith Bsci_1_90s_feb20.fits - dark_90s_feb20.fits Bsci_1_90s_feb20_s.fits	
+imarith Bsci_2_90s_feb20.fits - dark_90s_feb20.fits Bsci_2_90s_feb20_s.fits	
+imarith Bsci_3_90s_feb20.fits - dark_90s_feb20.fits Bsci_3_90s_feb20_s.fits	
+imarith Bsci_4_90s_feb20.fits - dark_90s_feb20.fits Bsci_4_90s_feb20_s.fits	
+imarith Bsci_5_90s_feb20.fits - dark_90s_feb20.fits Bsci_5_90s_feb20_s.fits	
+						                                
+imarith Bsci_6_90s_feb26.fits - dark_90s_feb26.fits Bsci_6_90s_feb26_s.fits	
+imarith Bsci_7_90s_feb26.fits - dark_90s_feb26.fits Bsci_7_90s_feb26_s.fits	
+imarith Bsci_8_90s_feb26.fits - dark_90s_feb26.fits Bsci_8_90s_feb26_s.fits	
+imarith Bsci_9_90s_feb26.fits - dark_90s_feb26.fits Bsci_9_90s_feb26_s.fits	
+imarith Bsci_10_90s_feb26.fits - dark_90s_feb26.fits Bsci_10_90s_feb26_s.fits	
+						                                
+imarith Bsci_11_90s_apr06.fits - dark_90s_apr07.fits Bsci_11_90s_apr06_s.fits	
+imarith Bsci_12_90s_apr06.fits - dark_90s_apr07.fits Bsci_12_90s_apr06_s.fits	
+imarith Bsci_13_90s_apr06.fits - dark_90s_apr07.fits Bsci_13_90s_apr06_s.fits	
+imarith Bsci_14_90s_apr06.fits - dark_90s_apr07.fits Bsci_14_90s_apr06_s.fits	
+imarith Bsci_15_90s_apr06.fits - dark_90s_apr07.fits Bsci_15_90s_apr06_s.fits	
+						                                
+# V/						                                
+imarith Vsci_1_90s_feb20.fits - dark_90s_feb20.fits Vsci_1_90s_feb20_s.fits	
+imarith Vsci_2_90s_feb20.fits - dark_90s_feb20.fits Vsci_2_90s_feb20_s.fits	
+						                                
+imarith Vsci_3_90s_feb26.fits - dark_90s_feb26.fits Vsci_3_90s_feb26_s.fits	
+imarith Vsci_4_90s_feb26.fits - dark_90s_feb26.fits Vsci_4_90s_feb26_s.fits	
+imarith Vsci_5_90s_feb26.fits - dark_90s_feb26.fits Vsci_5_90s_feb26_s.fits	
+imarith Vsci_6_90s_feb26.fits - dark_90s_feb26.fits Vsci_6_90s_feb26_s.fits	
+imarith Vsci_7_90s_feb26.fits - dark_90s_feb26.fits Vsci_7_90s_feb26_s.fits	
+						                                
+imarith Vsci_8_90s_apr06.fits - dark_90s_apr07.fits Vsci_8_90s_apr06_s.fits	
+imarith Vsci_9_90s_apr06.fits - dark_90s_apr07.fits Vsci_9_90s_apr06_s.fits	
+imarith Vsci_10_90s_apr06.fits - dark_90s_apr07.fits Vsci_10_90s_apr06_s.fits	
+imarith Vsci_11_90s_apr06.fits - dark_90s_apr07.fits Vsci_11_90s_apr06_s.fits	
+imarith Vsci_12_90s_apr06.fits - dark_90s_apr07.fits Vsci_12_90s_apr06_s.fits	
+						                                
+# R/						                                
+imarith Rsci_1_90s_feb20.fits - dark_90s_feb20.fits Rsci_1_90s_feb20_s.fits	
+imarith Rsci_2_90s_feb20.fits - dark_90s_feb20.fits Rsci_2_90s_feb20_s.fits	
+imarith Rsci_3_90s_feb20.fits - dark_90s_feb20.fits Rsci_3_90s_feb20_s.fits	
+imarith Rsci_4_90s_feb20.fits - dark_90s_feb20.fits Rsci_4_90s_feb20_s.fits	
+imarith Rsci_5_90s_feb20.fits - dark_90s_feb20.fits Rsci_5_90s_feb20_s.fits	
+						                                
+imarith Rsci_6_90s_feb26.fits - dark_90s_feb26.fits Rsci_6_90s_feb26_s.fits	
+imarith Rsci_7_90s_feb26.fits - dark_90s_feb26.fits Rsci_7_90s_feb26_s.fits	
+imarith Rsci_8_90s_feb26.fits - dark_90s_feb26.fits Rsci_8_90s_feb26_s.fits	
+imarith Rsci_9_90s_feb26.fits - dark_90s_feb26.fits Rsci_9_90s_feb26_s.fits	
+imarith Rsci_10_90s_feb26.fits - dark_90s_feb26.fits Rsci_10_90s_feb26_s.fits	
+						                                
+imarith Rsci_11_90s_apr06.fits - dark_90s_apr07.fits Rsci_11_90s_apr06_s.fits	
+imarith Rsci_12_90s_apr06.fits - dark_90s_apr07.fits Rsci_12_90s_apr06_s.fits	
+imarith Rsci_13_90s_apr06.fits - dark_90s_apr07.fits Rsci_13_90s_apr06_s.fits 	
+imarith Rsci_14_90s_apr06.fits - dark_90s_apr07.fits Rsci_14_90s_apr06_s.fits	
+imarith Rsci_15_90s_apr06.fits - dark_90s_apr07.fits Rsci_15_90s_apr06_s.fits	
+						                                
+# I/						                                
+imarith Isci_1_90s_apr06.fits - dark_90s_apr07.fits Isci_1_90s_apr06_s.fits	
+imarith Isci_2_90s_apr06.fits - dark_90s_apr07.fits Isci_2_90s_apr06_s.fits	
+imarith Isci_3_90s_apr06.fits - dark_90s_apr07.fits Isci_3_90s_apr06_s.fits	
+imarith Isci_4_90s_apr06.fits - dark_90s_apr07.fits Isci_4_90s_apr06_s.fits	
+imarith Isci_5_90s_apr06.fits - dark_90s_apr07.fits Isci_5_90s_apr06_s.fits		
+
+# Ha/
+imarith Hasci_1_150s_feb20.fits - dark_150s_feb20.fits Hasci_1_150s_feb20_s.fits
+imarith Hasci_2_150s_apr06.fits - dark_150s_apr08.fits Hasci_2_150s_apr06_s.fits
+imarith Hasci_3_150s_apr06.fits - dark_150s_apr08.fits Hasci_3_150s_apr06_s.fits
+imarith Hasci_4_150s_apr06.fits - dark_150s_apr08.fits Hasci_4_150s_apr06_s.fits
+imarith Hasci_5_150s_apr06.fits - dark_150s_apr08.fits Hasci_5_150s_apr06_s.fits
+imarith Hasci_6_150s_apr06.fits - dark_150s_apr08.fits Hasci_6_150s_apr06_s.fits
+
+# B_FLATS/
+imarith Bflat_1_0.2s_mar22.fits - dark_0.2s_mar22.fits Bflat_1_0.2s_mar22_s.fits
+imarith Bflat_2_0.2s_mar22.fits - dark_0.2s_mar22.fits Bflat_2_0.2s_mar22_s.fits
+imarith Bflat_3_0.2s_mar22.fits - dark_0.2s_mar22.fits Bflat_3_0.2s_mar22_s.fits
+
+# Ha_FLATS/
+imarith Haflat_1_4s_apr04.fits - dark_4s_apr04.fits Haflat_1_4s_apr04_s.fits
+imarith Haflat_2_4s_apr04.fits - dark_4s_apr04.fits Haflat_2_4s_apr04_s.fits
+imarith Haflat_3_4s_apr04.fits - dark_4s_apr04.fits Haflat_3_4s_apr04_s.fits
+imarith Haflat_4_4s_apr04.fits - dark_4s_apr04.fits Haflat_4_4s_apr04_s.fits
+imarith Haflat_5_4s_apr04.fits - dark_4s_apr04.fits Haflat_5_4s_apr04_s.fits
+
+# I_FLATS/
+imarith Iflat_1_0.6s_apr06.fits - dark_0.6s_apr06.fits Iflat_1_0.6s_apr06_s.fits
+imarith Iflat_2_0.6s_apr06.fits - dark_0.6s_apr06.fits Iflat_2_0.6s_apr06_s.fits
+imarith Iflat_3_0.6s_apr06.fits - dark_0.6s_apr06.fits Iflat_3_0.6s_apr06_s.fits
+imarith Iflat_4_0.6s_apr06.fits - dark_0.6s_apr06.fits Iflat_4_0.6s_apr06_s.fits
+imarith Iflat_5_0.6s_apr06.fits - dark_0.6s_apr06.fits Iflat_5_0.6s_apr06_s.fits
+
+# R_FLATS/
+imarith Rflat_1_0.5s_apr06.fits - dark_0.5s_apr06.fits Rflat_1_0.5s_apr06_s.fits
+imarith Rflat_2_0.5s_apr06.fits - dark_0.5s_apr06.fits Rflat_2_0.5s_apr06_s.fits
+imarith Rflat_3_0.5s_apr06.fits - dark_0.5s_apr06.fits Rflat_3_0.5s_apr06_s.fits
+imarith Rflat_4_0.5s_apr06.fits - dark_0.5s_apr06.fits Rflat_4_0.5s_apr06_s.fits
+imarith Rflat_5_0.5s_apr06.fits - dark_0.5s_apr06.fits Rflat_5_0.5s_apr06_s.fits
+
+# V_FLATS/
+imarith Vflat_1_15s_feb16.fits - dark_15s_apr07.fits Vflat_1_15s_feb16_s.fits
+imarith Vflat_2_15s_feb16.fits - dark_15s_apr07.fits Vflat_2_15s_feb16_s.fits
+
+
+## Step 3: Combine dark-subtracted flat-field images.
+
+imcombine input=Bflat_1_0.2s_mar22_s,Bflat_2_0.2s_mar22_s,Bflat_3_0.2s_mar22_s output=Bflat reject=none
+imcombine input=Haflat_1_4s_apr04_s,Haflat_2_4s_apr04_s,Haflat_3_4s_apr04_s,Haflat_4_4s_apr04_s,Haflat_5_4s_apr04_s output=Haflat reject=none
+imcombine input=Iflat_1_0.6s_apr06_s,Iflat_2_0.6s_apr06_s,Iflat_3_0.6s_apr06_s,Iflat_4_0.6s_apr06_s,Iflat_5_0.6s_apr06_s output=Iflat reject=none
+imcombine input=Rflat_1_0.5s_apr06_s,Rflat_2_0.5s_apr06_s,Rflat_3_0.5s_apr06_s,Rflat_4_0.5s_apr06_s,Rflat_5_0.5s_apr06_s output=Rflat reject=none
+imcombine input=Vflat_1_15s_feb16_s,Vflat_2_15s_feb16_s output=Vflat reject=none
+
+
+## Step 4: Normalize the flat-field images by dividing by the mean of the central regions.
+
+# Bflat - LL = 579 381, UR = 2540 1653
+imstat Bflat.fits[579:2540,381:1653]
+### mean: 22158.
+imarith Bflat.fits / 22158 Bflat_d.fits
+
+# Haflat - LL = 521 381, UR = 2546 1650
+imstat Haflat.fits[521:2546,381:1650]
+### mean = 32658.
+imarith Haflat.fits / 32658 Haflat_d.fits
+
+# Iflat - LL = 507 419, UR = 2525 1730
+imstat Iflat.fits[507:2525,419:1730]
+### mean = 20440.
+imarith Iflat.fits / 20440 Iflat_d.fits
+
+# Rflat - LL = 530 430, UR = 2502 1693
+imstat Rflat.fits[530:2502,430:1693]
+### mean = 23961.
+imarith Rflat.fits / 23961 Rflat_d.fits
+
+# Vflat - LL = 587 426, UR = 2620 1737
+imstat Vflat.fits[587:2620,426:1737]
+### mean = 20409.
+imarith Vflat.fits / 20409 Vflat_d.fits
+
+
+## Step 5: Apply flat-field correction to dark-subtracted science images.
+
+# B/
+imarith Bsci_1_90s_feb20_s.fits	/ Bflat_d.fits Bsci_1_90s_feb20_sf.fits	     
+imarith Bsci_2_90s_feb20_s.fits	/ Bflat_d.fits Bsci_2_90s_feb20_sf.fits	     
+imarith Bsci_3_90s_feb20_s.fits	/ Bflat_d.fits Bsci_3_90s_feb20_sf.fits	     
+imarith Bsci_4_90s_feb20_s.fits	/ Bflat_d.fits Bsci_4_90s_feb20_sf.fits	     
+imarith Bsci_5_90s_feb20_s.fits	/ Bflat_d.fits Bsci_5_90s_feb20_sf.fits	     
+                             		                                     
+imarith Bsci_6_90s_feb26_s.fits	/ Bflat_d.fits Bsci_6_90s_feb26_sf.fits	     
+imarith Bsci_7_90s_feb26_s.fits	/ Bflat_d.fits Bsci_7_90s_feb26_sf.fits	     
+imarith Bsci_8_90s_feb26_s.fits	/ Bflat_d.fits Bsci_8_90s_feb26_sf.fits	     
+imarith Bsci_9_90s_feb26_s.fits	/ Bflat_d.fits Bsci_9_90s_feb26_sf.fits	     
+imarith Bsci_10_90s_feb26_s.fits / Bflat_d.fits Bsci_10_90s_feb26_sf.fits    
+                             		                                     
+imarith Bsci_11_90s_apr06_s.fits / Bflat_d.fits Bsci_11_90s_apr06_sf.fits    
+imarith Bsci_12_90s_apr06_s.fits / Bflat_d.fits Bsci_12_90s_apr06_sf.fits    
+imarith Bsci_13_90s_apr06_s.fits / Bflat_d.fits Bsci_13_90s_apr06_sf.fits    
+imarith Bsci_14_90s_apr06_s.fits / Bflat_d.fits Bsci_14_90s_apr06_sf.fits    
+imarith Bsci_15_90s_apr06_s.fits / Bflat_d.fits Bsci_15_90s_apr06_sf.fits    
+                             		                                     
+# V/           				                                     
+imarith Vsci_1_90s_feb20_s.fits	/ Vflat_d.fits Vsci_1_90s_feb20_sf.fits	     
+imarith Vsci_2_90s_feb20_s.fits	/ Vflat_d.fits Vsci_2_90s_feb20_sf.fits	     
+                             		                                     
+imarith Vsci_3_90s_feb26_s.fits	/ Vflat_d.fits Vsci_3_90s_feb26_sf.fits	     
+imarith Vsci_4_90s_feb26_s.fits	/ Vflat_d.fits Vsci_4_90s_feb26_sf.fits	     
+imarith Vsci_5_90s_feb26_s.fits	/ Vflat_d.fits Vsci_5_90s_feb26_sf.fits	     
+imarith Vsci_6_90s_feb26_s.fits	/ Vflat_d.fits Vsci_6_90s_feb26_sf.fits	     
+imarith Vsci_7_90s_feb26_s.fits	/ Vflat_d.fits Vsci_7_90s_feb26_sf.fits	     
+                             		                                     
+imarith Vsci_8_90s_apr06_s.fits	/ Vflat_d.fits Vsci_8_90s_apr06_sf.fits	     
+imarith Vsci_9_90s_apr06_s.fits	/ Vflat_d.fits Vsci_9_90s_apr06_sf.fits	     
+imarith Vsci_10_90s_apr06_s.fits / Vflat_d.fits Vsci_10_90s_apr06_sf.fits    
+imarith Vsci_11_90s_apr06_s.fits / Vflat_d.fits Vsci_11_90s_apr06_sf.fits    
+imarith Vsci_12_90s_apr06_s.fits / Vflat_d.fits Vsci_12_90s_apr06_sf.fits    
+                             		                                     
+# R/                      		                                     
+imarith Rsci_1_90s_feb20_s.fits	/ Rflat_d.fits Rsci_1_90s_feb20_sf.fits	     
+imarith Rsci_2_90s_feb20_s.fits	/ Rflat_d.fits Rsci_2_90s_feb20_sf.fits	     
+imarith Rsci_3_90s_feb20_s.fits	/ Rflat_d.fits Rsci_3_90s_feb20_sf.fits	     
+imarith Rsci_4_90s_feb20_s.fits	/ Rflat_d.fits Rsci_4_90s_feb20_sf.fits	     
+imarith Rsci_5_90s_feb20_s.fits	/ Rflat_d.fits Rsci_5_90s_feb20_sf.fits	     
+                             		                                     
+imarith Rsci_6_90s_feb26_s.fits	/ Rflat_d.fits Rsci_6_90s_feb26_sf.fits	     
+imarith Rsci_7_90s_feb26_s.fits	/ Rflat_d.fits Rsci_7_90s_feb26_sf.fits	     
+imarith Rsci_8_90s_feb26_s.fits	/ Rflat_d.fits Rsci_8_90s_feb26_sf.fits	     
+imarith Rsci_9_90s_feb26_s.fits	/ Rflat_d.fits Rsci_9_90s_feb26_sf.fits	     
+imarith Rsci_10_90s_feb26_s.fits / Rflat_d.fits Rsci_10_90s_feb26_sf.fits    
+                             		                                     
+imarith Rsci_11_90s_apr06_s.fits / Rflat_d.fits Rsci_11_90s_apr06_sf.fits    
+imarith Rsci_12_90s_apr06_s.fits / Rflat_d.fits Rsci_12_90s_apr06_sf.fits    
+imarith Rsci_13_90s_apr06_s.fits / Rflat_d.fits Rsci_13_90s_apr06_sf.fits    
+imarith Rsci_14_90s_apr06_s.fits / Rflat_d.fits Rsci_14_90s_apr06_sf.fits    
+imarith Rsci_15_90s_apr06_s.fits / Rflat_d.fits Rsci_15_90s_apr06_sf.fits    
+					                                     
+# I/					                                     
+imarith Isci_1_90s_apr06_s.fits	/ Iflat_d.fits Isci_1_90s_apr06_sf.fits	     
+imarith Isci_2_90s_apr06_s.fits	/ Iflat_d.fits Isci_2_90s_apr06_sf.fits	     
+imarith Isci_3_90s_apr06_s.fits	/ Iflat_d.fits Isci_3_90s_apr06_sf.fits	     
+imarith Isci_4_90s_apr06_s.fits	/ Iflat_d.fits Isci_4_90s_apr06_sf.fits	     
+imarith Isci_5_90s_apr06_s.fits	/ Iflat_d.fits Isci_5_90s_apr06_sf.fits	     
+					                                     
+# Ha/					                                     
+imarith Hasci_1_150s_feb20_s.fits / Haflat_d.fits Hasci_1_150s_feb20_sf.fits 
+imarith Hasci_2_150s_apr06_s.fits / Haflat_d.fits Hasci_2_150s_apr06_sf.fits 
+imarith Hasci_3_150s_apr06_s.fits / Haflat_d.fits Hasci_3_150s_apr06_sf.fits 
+imarith Hasci_4_150s_apr06_s.fits / Haflat_d.fits Hasci_4_150s_apr06_sf.fits 
+imarith Hasci_5_150s_apr06_s.fits / Haflat_d.fits Hasci_5_150s_apr06_sf.fits 
+imarith Hasci_6_150s_apr06_s.fits / Haflat_d.fits Hasci_6_150s_apr06_sf.fits 
+
+
+## Step 6: Subtract mean sky background (determined by using imstat on regions that have no signal) from each of the science images.
+
+# B/
+imstat Bsci_1_90s_feb20_sf.fits[690:1886,250:800]
+imarith Bsci_1_90s_feb20_sf.fits - 813.1 Bsci_1_90s_feb20_nosky.fits		     
+imstat Bsci_2_90s_feb20_sf.fits[690:1886,250:800]
+imarith Bsci_2_90s_feb20_sf.fits - 829.9 Bsci_2_90s_feb20_nosky.fits
+imstat Bsci_3_90s_feb20_sf.fits[690:1886,250:800]
+imarith Bsci_3_90s_feb20_sf.fits - 840.1 Bsci_3_90s_feb20_nosky.fits
+imstat Bsci_4_90s_feb20_sf.fits[690:1886,250:800]
+imarith Bsci_4_90s_feb20_sf.fits - 859.1 Bsci_4_90s_feb20_nosky.fits
+imstat Bsci_5_90s_feb20_sf.fits[531:1807,359:800]
+imarith Bsci_5_90s_feb20_sf.fits - 873.5 Bsci_5_90s_feb20_nosky.fits	     
+
+## In examining the following group (Bsci_6 through Bsci_10) I found that there was a significant
+## gradient across the image. Looked like they had significant sky brightness that flat fielding 
+## did not correct. Did not use going forward.
+## Bsci_6_90s_feb26_sf.fits	     
+## Bsci_7_90s_feb26_sf.fits
+## Bsci_8_90s_feb26_sf.fits	     
+## Bsci_9_90s_feb26_sf.fits	     
+## Bsci_10_90s_feb26_sf.fits  
+                               
+imstat Bsci_11_90s_apr06_sf.fits[626:1974,288:761]
+imarith Bsci_11_90s_apr06_sf.fits - 428.7 Bsci_11_90s_apr06_nosky.fits
+imstat Bsci_12_90s_apr06_sf.fits[626:1974,288:761]
+imarith Bsci_12_90s_apr06_sf.fits - 424.8 Bsci_12_90s_apr06_nosky.fits
+imstat Bsci_13_90s_apr06_sf.fits[626:1974,288:761]
+imarith Bsci_13_90s_apr06_sf.fits - 425.4 Bsci_13_90s_apr06_nosky.fits
+imstat Bsci_14_90s_apr06_sf.fits[626:1974,288:761]
+imarith Bsci_14_90s_apr06_sf.fits - 421.8 Bsci_14_90s_apr06_nosky.fits
+imstat Bsci_15_90s_apr06_sf.fits[652:1656,270:718]
+imarith Bsci_15_90s_apr06_sf.fits - 418.7 Bsci_15_90s_apr06_nosky.fits
+                               
+# V/
+## Same deal with this group. Damn.                               
+## Vsci_1_90s_feb20_sf.fits	     
+## Vsci_2_90s_feb20_sf.fits	     
+
+## And this one. Everything's fine...
+## Vsci_3_90s_feb26_sf.fits	     
+## Vsci_4_90s_feb26_sf.fits	     
+## Vsci_5_90s_feb26_sf.fits	     
+## Vsci_6_90s_feb26_sf.fits	     
+## Vsci_7_90s_feb26_sf.fits	     
+                               
+imstat Vsci_8_90s_apr06_sf.fits[605:1869,385:602]
+imarith Vsci_8_90s_apr06_sf.fits - 802.2 Vsci_8_90s_apr06_nosky.fits
+imstat Vsci_9_90s_apr06_sf.fits[644:1782,288:739]
+imarith Vsci_9_90s_apr06_sf.fits - 800.7 Vsci_9_90s_apr06_nosky.fits	     
+imstat Vsci_10_90s_apr06_sf.fits[644:1782,288:739]
+imarith Vsci_10_90s_apr06_sf.fits - 796.2 Vsci_10_90s_apr06_nosky.fits
+imstat Vsci_11_90s_apr06_sf.fits[644:1782,288:739]
+imarith Vsci_11_90s_apr06_sf.fits - 783.7 Vsci_11_90s_apr06_nosky.fits
+imstat Vsci_12_90s_apr06_sf.fits[644:1782,288:739]
+imarith Vsci_12_90s_apr06_sf.fits - 787.8 Vsci_12_90s_apr06_nosky.fits
+                               
+# R/                               
+## These look a little questionable. Better to be safe than sorry.
+## Rsci_1_90s_feb20_sf.fits	     
+## Rsci_2_90s_feb20_sf.fits	     
+## Rsci_3_90s_feb20_sf.fits	     
+## Rsci_4_90s_feb20_sf.fits	     
+## Rsci_5_90s_feb20_sf.fits	     
+
+## All data from Februrary 26 are bad, I think.                               
+## Rsci_6_90s_feb26_sf.fits	     
+## Rsci_7_90s_feb26_sf.fits	     
+## Rsci_8_90s_feb26_sf.fits	     
+## Rsci_9_90s_feb26_sf.fits	     
+## Rsci_10_90s_feb26_sf.fits  
+                               
+## These'll have to do. I'll pay the consequences if they don't work.
+imstat Rsci_11_90s_apr06_sf.fits[1197:1941,1400:1834]
+imarith Rsci_11_90s_apr06_sf.fits - 1237 Rsci_11_90s_apr06_nosky.fits
+imstat Rsci_12_90s_apr06_sf.fits[1197:1941,1400:1834]
+imarith Rsci_12_90s_apr06_sf.fits - 1231 Rsci_12_90s_apr06_nosky.fits
+imstat Rsci_13_90s_apr06_sf.fits[1197:1941,1400:1834]
+imarith Rsci_13_90s_apr06_sf.fits - 1230 Rsci_13_90s_apr06_nosky.fits
+imstat Rsci_14_90s_apr06_sf.fits[1197:1941,1400:1834]
+imarith Rsci_14_90s_apr06_sf.fits - 1230 Rsci_14_90s_apr06_nosky.fits
+imstat Rsci_15_90s_apr06_sf.fits[1197:1941,1400:1834]
+imarith Rsci_15_90s_apr06_sf.fits - 1226 Rsci_15_90s_apr06_nosky.fits
+                               
+# I/
+## The weird banding effects are still there, and I guess they'll have to stay there.
+imstat Isci_1_90s_apr06_sf.fits[1410:2093,1368:1765]
+imarith Isci_1_90s_apr06_sf.fits - 255.4 Isci_1_90s_apr06_nosky.fits
+imstat Isci_2_90s_apr06_sf.fits[1410:2093,1368:1765]
+imarith Isci_2_90s_apr06_sf.fits - 255.8 Isci_2_90s_apr06_nosky.fits
+imstat Isci_3_90s_apr06_sf.fits[1410:2093,1368:1765]
+imarith Isci_3_90s_apr06_sf.fits - 254.9 Isci_3_90s_apr06_nosky.fits
+imstat Isci_4_90s_apr06_sf.fits[1410:2093,1368:1765]
+imarith Isci_4_90s_apr06_sf.fits - 252.3 Isci_4_90s_apr06_nosky.fits
+imstat Isci_5_90s_apr06_sf.fits[1410:2093,1368:1765]
+imarith Isci_5_90s_apr06_sf.fits - 249.6 Isci_5_90s_apr06_nosky.fits
+                               
+# Ha/
+## February 20 image looks poor so I will not use it going forward.                               
+## Hasci_1_150s_feb20_sf.fits
+ 
+imstat Hasci_2_150s_apr06_sf.fits[388:1266,313:660]
+imarith Hasci_2_150s_apr06_sf.fits - 78.63 Hasci_2_150s_apr06_nosky.fits
+imstat Hasci_3_150s_apr06_sf.fits[442:1204,302:696]
+imarith Hasci_3_150s_apr06_sf.fits - 75.32 Hasci_3_150s_apr06_nosky.fits
+imstat Hasci_4_150s_apr06_sf.fits[442:1204,302:696]
+imarith Hasci_4_150s_apr06_sf.fits - 74.81 Hasci_4_150s_apr06_nosky.fits
+imstat Hasci_5_150s_apr06_sf.fits[442:1204,302:696]
+imarith Hasci_5_150s_apr06_sf.fits - 74.03 Hasci_5_150s_apr06_nosky.fits
+imstat Hasci_6_150s_apr06_sf.fits[442:1204,302:696]
+imarith Hasci_6_150s_apr06_sf.fits - 73.81 Hasci_6_150s_apr06_nosky.fits
+
+
+## Step 7: Calculate differences in position between all of the images using imexam and then use imshift to shift them.
+## Pick a star and then find the coordinates. Shift everything to position of first image arbitrarily.
+
+# B/
+# Bsci_1_90s_feb20_nosky.fits 1979.47 1318.35 
+# Bsci_2_90s_feb20_nosky.fits 1972.83 1316.73
+imshift input=Bsci_2_90s_feb20_nosky.fits xshift=6.64 yshift=1.62 output=Bsci_2_90s_feb20_align.fits
+# Bsci_3_90s_feb20_nosky.fits 1968.31 1314.60
+imshift input=Bsci_3_90s_feb20_nosky.fits xshift=11.16 yshift=3.75 output=Bsci_3_90s_feb20_align.fits
+# Bsci_4_90s_feb20_nosky.fits 1961.70 1313.73
+imshift input=Bsci_4_90s_feb20_nosky.fits xshift=17.77 yshift=4.62 output=Bsci_4_90s_feb20_align.fits
+# Bsci_5_90s_feb20_nosky.fits 1956.69 1312.05
+imshift input=Bsci_5_90s_feb20_nosky.fits xshift=22.78 yshift=6.3 output=Bsci_5_90s_feb20_align.fits
+
+# Bsci_11_90s_apr06_nosky.fits 1978.94 1212.21
+imshift input=Bsci_11_90s_apr06_nosky.fits xshift=0.53 yshift=106.14 output=Bsci_11_90s_apr06_align.fits
+# Bsci_12_90s_apr06_nosky.fits 1969.03 1208.31
+imshift input=Bsci_12_90s_apr06_nosky.fits xshift=10.44 yshift=110.04 output=Bsci_12_90s_apr06_align.fits
+# Bsci_13_90s_apr06_nosky.fits 1971.01 1210.14
+imshift input=Bsci_13_90s_apr06_nosky.fits xshift=8.46 yshift=108.21 output=Bsci_13_90s_apr06_align.fits
+# Bsci_14_90s_apr06_nosky.fits 1965.70 1207.39
+imshift input=Bsci_14_90s_apr06_nosky.fits xshift=13.77 yshift=110.96 output=Bsci_14_90s_apr06_align.fits
+# Bsci_15_90s_apr06_nosky.fits 1962.57 1206.35
+imshift input=Bsci_15_90s_apr06_nosky.fits xshift=16.9 yshift=112 output=Bsci_15_90s_apr06_align.fits
+
+# V/
+# Vsci_8_90s_apr06_nosky.fits 1956.83 1206.45
+imshift input=Vsci_8_90s_apr06_nosky.fits xshift=22.64 yshift=111.9 output=Vsci_8_90s_apr06_align.fits
+# Vsci_9_90s_apr06_nosky.fits 1949.68 1205.49
+imshift input=Vsci_9_90s_apr06_nosky.fits xshift=29.79 yshift=112.86 output=Vsci_9_90s_apr06_align.fits
+# Vsci_10_90s_apr06_nosky.fits 1944.24 1205.17
+imshift input=Vsci_10_90s_apr06_nosky.fits xshift=35.23 yshift=113.18 output=Vsci_10_90s_apr06_align.fits
+# Vsci_11_90s_apr06_nosky.fits 1936.26 1202.55
+imshift input=Vsci_11_90s_apr06_nosky.fits xshift=43.21 yshift=115.8 output=Vsci_11_90s_apr06_align.fits
+# Vsci_12_90s_apr06_nosky.fits 1939.46 1203.97
+imshift input=Vsci_12_90s_apr06_nosky.fits xshift=40.01 yshift=114.38 output=Vsci_12_90s_apr06_align.fits
+
+# R/
+# Rsci_11_90s_apr06_nosky.fits 1928.17 1202.48
+imshift input=Rsci_11_90s_apr06_nosky.fits xshift=51.3 yshift=115.87 output=Rsci_11_90s_apr06_align.fits
+# Rsci_12_90s_apr06_nosky.fits 1924.81 1202.20
+imshift input=Rsci_12_90s_apr06_nosky.fits xshift=54.66 yshift=116.15 output=Rsci_12_90s_apr06_align.fits
+# Rsci_13_90s_apr06_nosky.fits 1922.51 1202.28
+imshift input=Rsci_13_90s_apr06_nosky.fits xshift=56.96 yshift=116.07 output=Rsci_13_90s_apr06_align.fits
+# Rsci_14_90s_apr06_nosky.fits 1919.49 1201.86
+imshift input=Rsci_14_90s_apr06_nosky.fits xshift=59.98 yshift=116.49 output=Rsci_14_90s_apr06_align.fits
+# Rsci_15_90s_apr06_nosky.fits 1915.99 1199.90
+imshift input=Rsci_15_90s_apr06_nosky.fits xshift=63.48 yshift=118.45 output=Rsci_15_90s_apr06_align.fits
+
+# I/
+# Isci_1_90s_apr06_nosky.fits 1907.49 1194.90
+imshift input=Isci_1_90s_apr06_nosky.fits xshift=71.98 yshift=123.45 output=Isci_1_90s_apr06_align.fits
+# Isci_2_90s_apr06_nosky.fits 1903.99 1193.87
+imshift input=Isci_2_90s_apr06_nosky.fits xshift=75.48 yshift=124.48 output=Isci_2_90s_apr06_align.fits
+# Isci_3_90s_apr06_nosky.fits 1902.05 1193.53
+imshift input=Isci_3_90s_apr06_nosky.fits xshift=77.42 yshift=124.82 output=Isci_3_90s_apr06_align.fits
+# Isci_4_90s_apr06_nosky.fits 1898.37 1192.26
+imshift input=Isci_4_90s_apr06_nosky.fits xshift=81.1 yshift=126.09 output=Isci_4_90s_apr06_align.fits
+# Isci_5_90s_apr06_nosky.fits 1893.77 1189.86
+imshift input=Isci_5_90s_apr06_nosky.fits xshift=85.7 yshift=128.49 output=Isci_5_90s_apr06_align.fits
+
+# Ha/
+# Hasci_2_150s_apr06_nosky.fits 1887.17 1188.50
+imshift input=Hasci_2_150s_apr06_nosky.fits xshift=92.3 yshift=129.85 output=Hasci_2_150s_apr06_align.fits
+# Hasci_3_150s_apr06_nosky.fits 1875.34 1188.79
+imshift input=Hasci_3_150s_apr06_nosky.fits xshift=104.13 yshift=129.56 output=Hasci_3_150s_apr06_align.fits
+# Hasci_4_150s_apr06_nosky.fits 1868.47 1187.17
+imshift input=Hasci_4_150s_apr06_nosky.fits xshift=111 yshift=131.18 output=Hasci_4_150s_apr06_align.fits
+# Hasci_5_150s_apr06_nosky.fits 1863.47 1184.45
+imshift input=Hasci_5_150s_apr06_nosky.fits xshift=116 yshift=133.9 output=Hasci_5_150s_apr06_align.fits
+# Hasci_6_150s_apr06_nosky.fits 1860.01 1182.88
+imshift input=Hasci_6_150s_apr06_nosky.fits xshift=119.46 yshift=135.47 output=Hasci_6_150s_apr06_align.fits
+
+
+## Step 8: Co-add these shifted images to produce a single, deeper image of the source using imcombine.
+imcombine input=Bsci* output=Bsci_final reject=crreject hsigma=3
+imcombine input=Vsci* output=Vsci_final reject=crreject hsigma=3
+imcombine input=Rsci* output=Rsci_final reject=crreject hsigma=3
+imcombine input=Isci* output=Isci_final reject=crreject hsigma=3
+imcombine input=Hasci* output=Hasci_final reject=crreject hsigma=3
+
+
+## Step 9: Trim edge effects off. Get the coordinates from "image" row in DS9.
+
+imcopy input=Bsci_final[181:3030,150:2006] output=Bsci_trim
+imcopy input=Vsci_final[181:3030,150:2006] output=Vsci_trim
+imcopy input=Rsci_final[181:3030,150:2006] output=Rsci_trim
+imcopy input=Isci_final[181:3030,150:2006] output=Isci_trim
+imcopy input=Hasci_final[181:3030,150:2006] output=Hasci_trim
+
+
+## Step 10: Change pixel type of science images for good measure.
+
+chpixtype input="Bsci_trim.fits" output="Bsci_trim.fits"
+chpixtype input="Vsci_trim.fits" output="Vsci_trim.fits"
+chpixtype input="Rsci_trim.fits" output="Rsci_trim.fits"
+chpixtype input="Isci_trim.fits" output="Isci_trim.fits"
+chpixtype input="Hasci_trim.fits" output="Hasci_trim.fits"
+
+
+## Step 11: Enforce a WCS solution for the 5 final science images taken with the Macalester Observatory.
+
+## Bsci_trim -> Bsci_wcs
+## Vsci_trim -> Vsci_wcs
+## Rsci_trim -> Rsci_wcs
+## Isci_trim -> Isci_wcs
+## Hasci_trim -> Hasci_wcs
+
+
+## Step 12: Create a tricolor image in kvis. Choose which three filters you'd like to be in one of your images, then
+## make an image. Then maybe make another with the leftover colors and maybe one already-used color.
+
+# first image: B V R (blue green red) -> rvb.eps
+# second image: B Ha R (blue green red) -> rhab.eps
+
+
+## Step 13: Search archival images for non-optical wavelength images of M63.
+
+# VLA HI 21cm -> NGC_5055_NA_MOM0_I_HI_wbb2008.fits
+# GALEX FUV -> NGA_NGC5055-fd-int.fits
+
+
+## Step 14: Do continuum subtraction on Halpha images using a scaled-down R-band image to remove the stars.
+
+## At 0.13 times the Rsci image.
+
+imarith Rsci_wcs.fits * 0.13 Rsci_wcs_0.13.fits
+imarith Hasci_wcs.fits - Rsci_wcs_0.13.fits Hasci_wcs_contsub0.13.fits
+
+
+## Step 15: Make a tricolor image using the continuum-subtracted verison of the Halpha image.
+
+# third image: B Ha_cs R (blue green red) -> rhacsb.eps
+
+
+## Step 16: Make final images including multiwavelength images.
